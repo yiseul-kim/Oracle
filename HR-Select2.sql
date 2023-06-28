@@ -291,7 +291,7 @@ ORDER BY ENAME ASC;
 9. 1981년도 입사한 사원의 이름과 입사일을 출력 하시오 ( like 연산자와 와일드 카드 사용 : _ , % )
 SELECT ENAME AS 이름, RPAD( SUBSTR (HIREDATE,1,3), LENGTH(HIREDATE),'*' ) AS 입사일
 FROM EMPLOYEE
-WHERE HIREDATE BETWEEN '81/01/01' AND '81/12/31';
+WHERE HIREDATE LIKE '81%';
 
 10. 관리자가 없는 사원의 이름과 담당업무를 출력하세요.
 SELECT ENAME 이름, JOB 담당업무
@@ -319,8 +319,7 @@ WHERE ENAME LIKE '%A%' AND ENAME LIKE '%E%'
     급여가 $1600, $950, 또는 $1300 이 아닌 사원의 이름, 담당업무, 급여를 출력하시오.
 SELECT ENAME 이름, JOB 담당업무, SALARY 급여 
 FROM EMPLOYEE
-WHERE JOB='CLERK' OR JOB='SALESMAN' AND 
- SALARY!=1600 AND SALARY!=950 AND SALARY!=1300;
+WHERE (JOB='CLERK' OR JOB='SALESMAN') AND SALARY NOT IN (1600,950,1300);
 
 15. 커미션이 $500이상인 사원의 이름과 급여 및 커미션을 출력하시오.  
 SELECT ENAME 이름, SALARY 급여, COMMISSION 커미션
@@ -328,8 +327,6 @@ FROM EMPLOYEE
 WHERE COMMISSION >= 500;
 
 SELECT* FROM EMPLOYEE;
-
-
 
 -- JOB ASC, ENAME DESC
 -- 두개 이상의 컬럼이 정렬될때, JOB 컬럼을 정렬후, JOB 컬럼의 중복되 ㄴ값에 대해서 ENAME DESC정렬됨
